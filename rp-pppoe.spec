@@ -5,10 +5,14 @@ Summary(ru):	PPP Over Ethernet (ÐÏÄÄÅÒÖËÁ xDSL)
 Summary(uk):	PPP Over Ethernet (Ð¦ÄÔÒÉÍËÁ xDSL)
 Name:		rp-pppoe
 Version:	3.5
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking
 Source0:	http://www.roaringpenguin.com/pppoe/%{name}-%{version}.tar.gz
+Source1:	%{name}-server.init
+Source2:	%{name}-server.sysconfig
+Source3:	%{name}-relay.init
+Source4:	%{name}-relay.sysconfig
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-tkpppoe.in.patch
 URL:		http://www.roaringpenguin.com/pppoe/
@@ -63,9 +67,7 @@ PPPoE (Point-to-Point Protocol over Ethernet) - ÃÅ ÐÒÏÔÏËÏÌ, ÑËÉÊ
 Summary:	GUI front-end for rp-pppoe
 Summary(pl):	Graficzny interfejs dla rp-pppoe
 Summary(pt_BR):	Interface gráfica para configuração do rp-pppoe
-Group:		X11/Networking
-######		Unknown group!
-######		Unknown group!
+Group:		X11/Applications/Networking
 Requires:	rp-pppoe >= 3.4
 
 %description gui
@@ -78,6 +80,29 @@ Graficzny interfejs u¿ytkownika (bazuj±cy na tk) dla rp-pppoe.
 Este pacote fornece uma interface gráfica para a configuração do
 rp-pppoe.
 
+%package server
+Summary:	PPPoE server
+Summary(pl):	Serwer PPPoE
+Group:		Networking/Daemons
+Requires:	ppp >= 2.4.1
+
+%description server
+PPP over Ethernet server.
+
+%description -l pl server
+Serwer PPP over Ethernet.
+
+%package relay
+Summary:	PPPoE relay
+Summary(pl):	Agent przekazuj±cy pakiety PPPoE
+Group:		Networking/Daemons
+
+%description relay
+PPP over Ethernet relay.
+
+%description -l pl relay
+Agent przekazuj±cy pakiety PPPoE.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -88,18 +113,24 @@ cd src
 %{__aclocal}
 %{__autoconf}
 %configure
-# kernel mode PPPoE support is in pppd 2.4.2 (cvs) package
-# and we want here such support in utilities like pppoe-server
+# we always want kernel mode PPPoE support in utilities
 echo '#define HAVE_LINUX_KERNEL_PPPOE 1' >> config.h
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/{sysconfig,rc.d/init.d}
+
 %{__make} -C src install \
 	RPM_INSTALL_ROOT=$RPM_BUILD_ROOT
 %{__make} -C gui install \
 	RPM_INSTALL_ROOT=$RPM_BUILD_ROOT
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pppoe-server
+install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/pppoe-server
+install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pppoe-relay
+install %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/pppoe-relay
 
 # This is necessary for the gui to work, but it shouldn't be done here !
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/ppp/rp-pppoe-gui
@@ -107,18 +138,52 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/ppp/rp-pppoe-gui
 %clean
 rm -fr $RPM_BUILD_ROOT
 
+%post server
+/sbin/chkconfig --add pppoe-server
+if [ -f /var/lock/subsys/pppoe-server ]; then
+        /etc/rc.d/init.d/pppoe-server restart 1>&2
+else
+        echo "Run \"/etc/rc.d/init.d/pppoe-server start\" to start PPPoE daemon."
+fi
+
+%preun server
+if [ "$1" = "0" ]; then
+        if [ -f /var/lock/subsys/pppoe-server ]; then
+                /etc/rc.d/init.d/pppoe-server stop 1>&2
+        fi
+        /sbin/chkconfig --del pppoe-server
+fi
+
+%post relay
+/sbin/chkconfig --add pppoe-relay
+if [ -f /var/lock/subsys/pppoe-relay ]; then
+        /etc/rc.d/init.d/pppoe-relay restart 1>&2
+else
+        echo "Run \"/etc/rc.d/init.d/pppoe-relay start\" to start PPPoE relay daemon."
+fi
+
+%preun relay
+if [ "$1" = "0" ]; then
+        if [ -f /var/lock/subsys/pppoe-relay ]; then
+                /etc/rc.d/init.d/pppoe-relay stop 1>&2
+        fi
+        /sbin/chkconfig --del pppoe-relay
+fi
+
 %files
 %defattr(644,root,root,755)
 %doc doc/* README
-%attr(755,root,root) %{_sbindir}/*
-%exclude %{_bindir}/tkpppoe
-%exclude %{_sbindir}/pppoe-wrapper
+%attr(755,root,root) %{_sbindir}/adsl*
+%attr(755,root,root) %{_sbindir}/pppoe
+%attr(755,root,root) %{_sbindir}/pppoe-sniff
 
 %config(noreplace) %{_sysconfdir}/ppp/pppoe.conf
-%config(noreplace) %{_sysconfdir}/ppp/pppoe-server-options
 %config(noreplace) %{_sysconfdir}/ppp/firewall-masq
 %config(noreplace) %{_sysconfdir}/ppp/firewall-standalone
-%{_mandir}/man[58]/*
+%{_mandir}/man5/*
+%{_mandir}/man8/adsl*
+%{_mandir}/man8/pppoe.*
+%{_mandir}/man8/pppoe-sniff*
 
 %files gui
 %defattr(644,root,root,755)
@@ -127,3 +192,18 @@ rm -fr $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/ppp/rp-pppoe-gui
 %{_datadir}/tkpppoe
 %{_mandir}/man1/*
+
+%files server
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_sbindir}/pppoe-server
+%config(noreplace) %{_sysconfdir}/ppp/pppoe-server-options
+%{_mandir}/man8/pppoe-server*
+%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/pppoe-server
+%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/sysconfig/pppoe-server
+
+%files relay
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_sbindir}/pppoe-relay
+%{_mandir}/man8/pppoe-relay*
+%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/pppoe-relay
+%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/sysconfig/pppoe-relay
