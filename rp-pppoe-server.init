@@ -21,7 +21,7 @@ is_no "${NETWORKING}" && exit 0
 
 PPPOE_SERVER_IFACES_OPT=
 if [ -n "$PPPOE_SERVER_IFACES" ]; then
-    for iface in "$PPPOE_SERVER_IFACES"; do
+    for iface in $PPPOE_SERVER_IFACES; do
 	PPPOE_SERVER_IFACES_OPT="-I $iface $PPPOE_SERVER_IFACES_OPT"
     done
 fi
