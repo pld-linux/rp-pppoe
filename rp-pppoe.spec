@@ -4,6 +4,7 @@ Name:		rp-pppoe
 Version:	3.5
 Release:	1
 Source0:	http://www.roaringpenguin.com/pppoe/%{name}-%{version}.tar.gz
+Patch0:		%{name}-ac.patch
 URL:		http://www.roaringpenguin.com/pppoe/
 License:	GPL
 Group:		Networking
@@ -41,6 +42,8 @@ Graficzny interfejs u¿ytkownika (bazuj±cy na tk) dla rp-pppoe.
 
 %prep
 %setup -q
+%patch0 -p1
+
 %build
 cd src
 %{__aclocal}
