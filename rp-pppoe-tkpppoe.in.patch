@@ -1,0 +1,19 @@
+--- rp-pppoe-3.5/gui/tkpppoe.in~	Sat Aug 17 01:26:34 2002
++++ rp-pppoe-3.5/gui/tkpppoe.in	Sat Aug 17 01:26:34 2002
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/usr/bin/wish
+ # -*-Mode: TCL;-*-
+ # LIC: GPL
+ 
+@@ -19,10 +19,6 @@
+ 
+ # $Id$
+ 
+-# the next line restarts using wish \
+-umask 022; \
+-exec wish "$0" "$@" || clear; echo "*****"; echo "Cannot find 'wish' -- you need Tcl/Tk installed to run this program"; exit 1
+-
+ # Try requiring msgcat (Tcl 8.1 and later)
+ 
+ set problem [catch {package require msgcat} err]
