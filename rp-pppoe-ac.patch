@@ -136,3 +136,21 @@ diff -urN rp-pppoe-3.5.org/src/configure.in rp-pppoe-3.5/src/configure.in
 +AC_MSG_WARN([$TARGETS])
 +AC_MSG_WARN([Type 'make' to compile the software.])
 
+diff -urN rp-pppoe-3.5.org/src/configure.in rp-pppoe-3.5/src/configure.in
+--- rp-pppoe-3.5.org/src/configure.in	Tue Aug 13 17:28:29 2002
++++ rp-pppoe-3.5/src/configure.in	Tue Aug 13 17:35:35 2002
+@@ -174,12 +174,13 @@
+         AC_MSG_WARN([*** Oops!  I couldn't find pppd, the PPP daemon anywhere.])
+ 	AC_MSG_WARN([*** You must install pppd, version 2.3.10 or later.])
+ 	AC_MSG_WARN([*** I will keep going, but it may not work.])
++	PPPD="pppd"
+ fi
+ 
+ dnl Figure out pppd version.  2.3.7 to 2.3.9 -- issue warning.  Less than
+ dnl 2.3.7 -- stop
+ 
+-PPPD_VERSION=`$PPPD --version 2>&1 | awk '{print $NF}'`
++PPPD_VERSION=`$PPPD --version 2>&1 | awk ' /version/ {print $NF}'`
+ 
+ case "$PPPD_VERSION" in
+ 1.*|2.0.*|2.1.*|2.2.*|2.3.0|2.3.1|2.3.2|2.3.3|2.3.4|2.3.5|2.3.6)

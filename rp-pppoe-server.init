@@ -1,0 +1,77 @@
+#!/bin/sh
+#
+# pppoe-server	PPP over Ethernet Server
+#
+# chkconfig:	345 46 54
+#
+# description:	PPP over Ethernet Server
+#
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+# Get service config
+[ -f /etc/sysconfig/pppoe-server ] && . /etc/sysconfig/pppoe-server
+
+# Check that networking is up.
+is_no "${NETWORKING}" && exit 0
+
+PPPOE_SERVER_IFACES_OPT=
+if [ -n "$PPPOE_SERVER_IFACES" ]; then
+    for iface in "$PPPOE_SERVER_IFACES"; do
+	PPPOE_SERVER_IFACES_OPT="-I $iface $PPPOE_SERVER_IFACES_OPT"
+    done
+fi
+[ -z "$PPPOE_SERVER_AC_NAME" ] && PPPOE_SERVER_AC_NAME="$(hostname -s)"
+[ -z "$PPPOE_SERVER_LOCAL_IP" ] && PPPOE_SERVER_LOCAL_IP="$(hostname -i)"
+[ -z "$PPPOE_SERVER_SERVICE_NAME" ] && PPPOE_SERVER_SERVICE_NAME="PPPoE Server"
+[ -z "$PPPOE_SERVER_MAX_CLIENTS" ] && PPPOE_SERVER_MAX_CLIENTS=64
+
+
+# See how we were called.
+case "$1" in
+  start)
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/pppoe-server ]; then
+		msg_starting "PPPoE Server"
+		modprobe -k pppoe > /dev/null 2>&1
+		for iface in $PPPOE_SERVER_IFACES; do
+		    ip link set $iface up 2> /dev/null
+		done
+		daemon /usr/sbin/pppoe-server \
+			${PPPOE_SERVER_IFACES_OPT:--I eth0} -C $PPPOE_SERVER_AC_NAME \
+			-L $PPPOE_SERVER_LOCAL_IP -S $PPPOE_SERVER_SERVICE_NAME \
+			-N $PPPOE_SERVER_MAX_CLIENTS $PPPOE_SERVER_OPTIONS
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/pppoe-server
+	else
+		msg_already_running "PPPoE Server"
+	fi
+	;;
+  stop)
+        if [ -f /var/lock/subsys/pppoe-server ]; then
+		msg_stopping "PPPoE Server"
+		killproc pppoe-server
+		rm -f /var/lock/subsys/pppoe-server >/dev/null 2>&1
+	else
+		msg_not_running "PPPoE Server"
+		RETVAL=1
+	fi	
+	;;
+  restart|reload)
+	$0 stop
+	$0 start
+	;;
+  status)
+	status pppoe-server
+	RETVAL=$?
+	;;
+  *)
+	msg_usage "$0 {start|stop|init|status|restart|reload}"
+	exit 1
+esac
+
+exit $RETVAL

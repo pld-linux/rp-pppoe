@@ -1,0 +1,14 @@
+# Only PPPoE servers may be connected to this interfaces ("eth0 eth1")
+#PPPOE_RELAY_IFACES_SERVERS=
+
+# Only PPPoE clients may be connected to this interface
+#$PPPOE_RELAY_IFACES_CLIENTS=
+
+# Both PPPoE clients and servers may be connected to this interface
+#PPPOE_RELAY_IFACES_BOTH=
+
+# Maximal number of sessions
+#PPPOE_RELAY_MAX_SESSIONS=
+
+# Timeout for session in seconds
+#PPPOE_RELAY_TIMEOUT=

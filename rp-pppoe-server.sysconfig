@@ -1,0 +1,18 @@
+# pppoe server interffaces (ie. "eth0 eth1 eth5")
+PPPOE_SERVER_IFACES="eth0"
+
+# pppoe access concentrator name
+#PPPOE_SERVER_AC_NAME=
+
+# local IP advertised by server
+#PPPOE_SERVER_LOCAL_IP=
+
+# service name advertised by server
+#PPPOE_SERVER_SERVICE_NAME="PPPoE Server"
+
+# max number of pppoe clients
+PPPOE_SERVER_MAX_CLIENTS=64
+
+# additional options
+PPPOE_SERVER_OPTIONS="-k"
+
