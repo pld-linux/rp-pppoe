@@ -3,8 +3,8 @@ Summary(pl):	Klient PPP Poprzez Ethernet (PPPoE)
 Name:		rp-pppoe
 Version:	3.5
 Release:	1
-Source0:	http://www.roaringpenguin.com/%{name}-%{version}.tar.bz2
-URL:		http://www.roaringpenguin.com/pppoe
+Source0:	http://www.roaringpenguin.com/pppoe/%{name}-%{version}.tar.gz
+URL:		http://www.roaringpenguin.com/pppoe/
 License:	GPL
 Group:		Networking
 Requires:	ppp >= 2.4.1
