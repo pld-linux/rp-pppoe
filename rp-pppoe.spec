@@ -152,33 +152,33 @@ rm -fr $RPM_BUILD_ROOT
 %post server
 /sbin/chkconfig --add pppoe-server
 if [ -f /var/lock/subsys/pppoe-server ]; then
-        /etc/rc.d/init.d/pppoe-server restart 1>&2
+	/etc/rc.d/init.d/pppoe-server restart 1>&2
 else
-        echo "Run \"/etc/rc.d/init.d/pppoe-server start\" to start PPPoE daemon."
+	echo "Run \"/etc/rc.d/init.d/pppoe-server start\" to start PPPoE daemon."
 fi
 
 %preun server
 if [ "$1" = "0" ]; then
-        if [ -f /var/lock/subsys/pppoe-server ]; then
-                /etc/rc.d/init.d/pppoe-server stop 1>&2
-        fi
-        /sbin/chkconfig --del pppoe-server
+	if [ -f /var/lock/subsys/pppoe-server ]; then
+		/etc/rc.d/init.d/pppoe-server stop 1>&2
+	fi
+	/sbin/chkconfig --del pppoe-server
 fi
 
 %post relay
 /sbin/chkconfig --add pppoe-relay
 if [ -f /var/lock/subsys/pppoe-relay ]; then
-        /etc/rc.d/init.d/pppoe-relay restart 1>&2
+	/etc/rc.d/init.d/pppoe-relay restart 1>&2
 else
-        echo "Run \"/etc/rc.d/init.d/pppoe-relay start\" to start PPPoE relay daemon."
+	echo "Run \"/etc/rc.d/init.d/pppoe-relay start\" to start PPPoE relay daemon."
 fi
 
 %preun relay
 if [ "$1" = "0" ]; then
-        if [ -f /var/lock/subsys/pppoe-relay ]; then
-                /etc/rc.d/init.d/pppoe-relay stop 1>&2
-        fi
-        /sbin/chkconfig --del pppoe-relay
+	if [ -f /var/lock/subsys/pppoe-relay ]; then
+		/etc/rc.d/init.d/pppoe-relay stop 1>&2
+	fi
+	/sbin/chkconfig --del pppoe-relay
 fi
 
 %files
