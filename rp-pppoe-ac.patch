@@ -1,0 +1,137 @@
+diff -urN rp-pppoe-3.5.org/src/configure.in rp-pppoe-3.5/src/configure.in
+--- rp-pppoe-3.5.org/src/configure.in	Mon Aug 12 21:09:47 2002
++++ rp-pppoe-3.5/src/configure.in	Mon Aug 12 21:35:58 2002
+@@ -26,17 +26,17 @@
+ AC_HEADER_TIME
+ AC_STRUCT_TM
+ 
+-dnl Check for an echo which supports -n -- another hack for Solaris
+-AC_PATH_PROG(ECHO, echo, "", /usr/ucb/bin:$PATH)
+-
+ dnl Check for sockaddr_ll
+ AC_MSG_CHECKING(for struct sockaddr_ll)
+ AC_TRY_COMPILE([#include <asm/types.h>
+ #include <linux/if_packet.h>
+ #include <linux/if_ether.h>
+ ], [struct sockaddr_ll sa;],
+-ac_cv_struct_sockaddr_ll=yes, ac_cv_struct_sockaddr_ll=no)
+-$ECHO $ac_cv_struct_sockaddr_ll
++[ac_cv_struct_sockaddr_ll=yes
++ AC_MSG_RESULT(yes)],
++[ac_cv_struct_sockaddr_ll=no
++ AC_MSG_RESULT(no)
++])
+ if test "$ac_cv_struct_sockaddr_ll" = yes ; then
+ AC_DEFINE(HAVE_STRUCT_SOCKADDR_LL)
+ fi
+@@ -45,8 +45,10 @@
+ AC_MSG_CHECKING(for N_HDLC line discipline)
+ AC_TRY_COMPILE([#include <linux/termios.h>],
+ 	[int x = N_HDLC;],
+-	ac_cv_n_hdlc=yes, ac_cv_n_hdlc=no)
+-$ECHO $ac_cv_n_hdlc
++	[ac_cv_n_hdlc=yes
++	 AC_MSG_RESULT(yes)],
++	[ac_cv_n_hdlc=no
++	 AC_MSG_RESULT(no)])
+ if test "$ac_cv_n_hdlc" = yes ; then
+ AC_DEFINE(HAVE_N_HDLC)
+ fi
+@@ -146,12 +148,15 @@
+ {
+ 	if (socket(AF_PPPOX, SOCK_DGRAM, PX_PROTO_OE) >= 0) return 0; else return 1;
+ }
+-], ac_cv_linux_kernel_pppoe=yes, ac_cv_linux_kernel_pppoe=no)
++], [ac_cv_linux_kernel_pppoe=yes
++    AC_MSG_RESULT(yes)], 
++   [ac_cv_linux_kernel_pppoe=no
++    AC_MSG_RESULT(no)])
+ else
+ 	ac_cv_linux_kernel_pppoe=no
++	AC_MSG_RESULT(no)
+ fi
+ 
+-$ECHO $ac_cv_linux_kernel_pppoe
+ if test "$ac_cv_linux_kernel_pppoe" != yes ; then
+    if test "$LINUX_KERNELMODE_PLUGIN" = rp-pppoe.so; then
+       echo "*** Your kernel does not appear to have built-in PPPoE support,"
+@@ -166,11 +171,9 @@
+ 
+ dnl If we couldn't find pppd, die
+ if test "$PPPD" = "NOTFOUND"; then
+-	$ECHO ""
+-	$ECHO "*** Oops!  I couldn't find pppd, the PPP daemon anywhere."
+-	$ECHO "*** You must install pppd, version 2.3.10 or later."
+-	$ECHO "*** I will keep going, but it may not work."
+-	$ECHO ""
++        AC_MSG_WARN(*** Oops!  I couldn't find pppd, the PPP daemon anywhere.)
++	AC_MSG_WARN(*** You must install pppd, version 2.3.10 or later.)
++	AC_MSG_WARN(*** I will keep going, but it may not work.)
+ fi
+ 
+ dnl Figure out pppd version.  2.3.7 to 2.3.9 -- issue warning.  Less than
+@@ -180,30 +183,24 @@
+ 
+ case "$PPPD_VERSION" in
+ 1.*|2.0.*|2.1.*|2.2.*|2.3.0|2.3.1|2.3.2|2.3.3|2.3.4|2.3.5|2.3.6)
+-	$ECHO ""
+-	$ECHO "*** Oops! Your version of pppd is $PPPD_VERSION, which is too old."
+-	$ECHO "*** You need at least 2.3.7 (2.3.10 or newer recommended.)"
+-	$ECHO "*** I will keep going, but it may not work."
+-	$ECHO ""
++	AC_MSG_WARN(*** Oops! Your version of pppd is $PPPD_VERSION, which is too old.)
++	AC_MSG_WARN(*** You need at least 2.3.7 (2.3.10 or newer recommended.)
++	AC_MSG_WARN(*** I will keep going, but it may not work.)
+ 	;;
+ 
+ 2.3.7|2.3.8|2.3.9)
+-	$ECHO ""
+-	$ECHO "*** Warning.  Your version of pppd is $PPPD_VERSION.  You will"
+-	$ECHO "*** not be able to use connect-on-demand.  Upgrade to pppd"
+-	$ECHO "*** 2.3.10 or newer if you need connect-on-demand."
+-	$ECHO ""
++	AC_MSG_WARN(*** Warning.  Your version of pppd is $PPPD_VERSION.  You will)
++	AC_MSG_WARN(*** not be able to use connect-on-demand.  Upgrade to pppd)
++	AC_MSG_WARN(*** 2.3.10 or newer if you need connect-on-demand.)
+ 	;;
+ 
+ 2*|3*|4*|5*|6*|7*|8*|9*)
+ 	;;
+ 
+ *)
+-	$ECHO ""
+-	$ECHO "*** Oops.  I cannot figure out what version of pppd you have."
+-	$ECHO "*** All I got back was '$PPPD_VERSION'"
+-	$ECHO "*** I will keep going, but it may not work."
+-	$ECHO ""
++	AC_MSG_WARN(*** Oops.  I cannot figure out what version of pppd you have.)
++	AC_MSG_WARN(*** All I got back was '$PPPD_VERSION')
++	AC_MSG_WARN(*** I will keep going, but it may not work.)
+ 	;;
+ esac
+ 
+@@ -234,10 +231,10 @@
+ }], PACK=normal, PACK=rev)
+ 
+ if test "$PACK" = "rev" ; then
+-	$ECHO "reversed"
++	AC_MSG_RESULT(reversed)
+ 	AC_DEFINE(PACK_BITFIELDS_REVERSED)
+ else
+-	$ECHO "normal"
++	AC_MSG_RESULT(normal)
+ fi
+ 
+ # Sigh... got to fix this up for tcl
+@@ -304,8 +301,6 @@
+ 
+ AC_OUTPUT(Makefile libevent/Makefile ../scripts/adsl-connect ../scripts/adsl-start ../scripts/adsl-stop ../scripts/adsl-init ../scripts/adsl-init-suse ../scripts/adsl-init-turbolinux ../scripts/adsl-setup ../gui/Makefile ../gui/tkpppoe $EXTRACONFIGS)
+ 
+-$ECHO ""
+-$ECHO "On this platform, the following targets will be built:"
+-$ECHO "        $TARGETS"
+-$ECHO ""
+-$ECHO "Type 'make' to compile the software."
++AC_MSG_WARN(On this platform, the following targets will be built:)
++AC_MSG_WARN(        $TARGETS)
++AC_MSG_WARN(Type 'make' to compile the software.)
