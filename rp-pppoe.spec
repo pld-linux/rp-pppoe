@@ -7,7 +7,7 @@ Summary(ru):	PPP Over Ethernet (–œƒƒ≈“÷À¡ xDSL)
 Summary(uk):	PPP Over Ethernet (–¶ƒ‘“…ÕÀ¡ xDSL)
 Name:		rp-pppoe
 Version:	3.5
-Release:	5
+Release:	6
 License:	GPL v2+
 Group:		Networking
 Source0:	http://www.roaringpenguin.com/pppoe/%{name}-%{version}.tar.gz
@@ -19,6 +19,7 @@ Source4:	%{name}-relay.sysconfig
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-tkpppoe.in.patch
 Patch2:		%{name}-enobufs.patch
+Patch3:		%{name}-plugins.patch
 URL:		http://www.roaringpenguin.com/pppoe/
 BuildRequires:	automake
 BuildRequires:	autoconf
@@ -118,6 +119,7 @@ Agent przekazuj±cy pakiety PPPoE.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 cd src
