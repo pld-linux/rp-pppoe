@@ -9,6 +9,7 @@ Release:	3
 License:	GPL v2+
 Group:		Networking
 Source0:	http://www.roaringpenguin.com/pppoe/%{name}-%{version}.tar.gz
+# Source0-md5:	97972f8f8f6a3ab9b7070333a6a29c4b
 Source1:	%{name}-server.init
 Source2:	%{name}-server.sysconfig
 Source3:	%{name}-relay.init
