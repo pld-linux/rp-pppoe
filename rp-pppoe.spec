@@ -131,10 +131,10 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/{sysconfig,rc.d/init.d}
 %{__make} -C gui install \
 	RPM_INSTALL_ROOT=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pppoe-server
-install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/pppoe-server
-install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/pppoe-relay
-install %{SOURCE4} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/pppoe-relay
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/pppoe-server
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/pppoe-server
+install %{SOURCE3} $RPM_BUILD_ROOT/etc/rc.d/init.d/pppoe-relay
+install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/pppoe-relay
 
 # This is necessary for the gui to work, but it shouldn't be done here !
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/ppp/rp-pppoe-gui
@@ -202,12 +202,12 @@ fi
 %attr(755,root,root) %{_sbindir}/pppoe-server
 %config(noreplace) %{_sysconfdir}/ppp/pppoe-server-options
 %{_mandir}/man8/pppoe-server*
-%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/pppoe-server
-%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/sysconfig/pppoe-server
+%attr(754,root,root) /etc/rc.d/init.d/pppoe-server
+%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/sysconfig/pppoe-server
 
 %files relay
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/pppoe-relay
 %{_mandir}/man8/pppoe-relay*
-%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/pppoe-relay
-%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/sysconfig/pppoe-relay
+%attr(754,root,root) /etc/rc.d/init.d/pppoe-relay
+%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/sysconfig/pppoe-relay
