@@ -17,20 +17,27 @@
 [ -f /etc/sysconfig/pppoe-relay ] && . /etc/sysconfig/pppoe-relay
 
 # Check that networking is up.
-is_no "${NETWORKING}" && exit 0
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network ]; then
+		msg_network_down "PPPoE Relay Server"
+		exit 1
+	fi
+else
+	exit 0
+fi
 
 PPPOE_RELAY_IFACES_SERVERS_OPT=
 for iface in $PPPOE_RELAY_IFACES_SERVERS; do
-    PPPOE_RELAY_IFACES_SERVERS_OPT="-S $iface $$PPPOE_RELAY_IFACES_SERVERS"
+	PPPOE_RELAY_IFACES_SERVERS_OPT="-S $iface $$PPPOE_RELAY_IFACES_SERVERS"
 done
-    
+
 PPPOE_RELAY_IFACES_CLIENTS=
 for iface in $PPPOE_RELAY_IFACES_CLIENTS; do
-    PPPOE_RELAY_IFACES_CLIENTS_OPT="-C $iface $PPPOE_RELAY_IFACES_CLIENTS"
+	PPPOE_RELAY_IFACES_CLIENTS_OPT="-C $iface $PPPOE_RELAY_IFACES_CLIENTS"
 done
 PPPOE_RELAY_IFACES_BOTH=
 for iface in $PPPOE_RELAY_IFACES_BOTH; do
-    PPPOE_RELAY_IFACES_BOTH_OPT="-B $iface $PPPOE_RELAY_IFACES_BOTH"
+	PPPOE_RELAY_IFACES_BOTH_OPT="-B $iface $PPPOE_RELAY_IFACES_BOTH"
 done
 
 [ -z "$PPPOE_RELAY_MAX_SESSIONS" ] && PPPOE_RELAY_MAX_SESSIONS=500
@@ -43,7 +50,7 @@ case "$1" in
 	if [ ! -f /var/lock/subsys/pppoe-relay ]; then
 		msg_starting "PPPoE Relay Server"
 		for iface in $PPPOE_RELAY_IFACES_SERVERS $PPPOE_RELAY_IFACES_CLIENTS $PPPOE_RELAY_IFACES_BOTH; do
-		    ip link set $iface up 2> /dev/null
+			ip link set $iface up 2> /dev/null
 		done
 		daemon /usr/sbin/pppoe-relay \
 			$PPPOE_RELAY_IFACES_SERVERS_OPT \
@@ -54,16 +61,17 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/pppoe-relay
 	else
 		msg_already_running "PPPoE Relay Server"
+		exit 1
 	fi
 	;;
   stop)
-        if [ -f /var/lock/subsys/pppoe-relay ]; then
+	if [ -f /var/lock/subsys/pppoe-relay ]; then
 		msg_stopping "PPPoE Relay Server"
 		killproc pppoe-relay
 		rm -f /var/lock/subsys/pppoe-relay >/dev/null 2>&1
 	else
 		msg_not_running "PPPoE Relay Server"
-		RETVAL=1
+		exit 1
 	fi	
 	;;
   restart|reload)
@@ -75,7 +83,7 @@ case "$1" in
 	RETVAL=$?
 	;;
   *)
-	msg_usage "$0 {start|stop|init|status|restart|reload}"
+	msg_usage "$0 {start|stop|init|restart|reload|status}"
 	exit 1
 esac
 

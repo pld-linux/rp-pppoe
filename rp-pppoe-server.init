@@ -17,13 +17,20 @@
 [ -f /etc/sysconfig/pppoe-server ] && . /etc/sysconfig/pppoe-server
 
 # Check that networking is up.
-is_no "${NETWORKING}" && exit 0
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network ]; then
+		msg_network_down "PPPoE Server"
+		exit 1
+	fi
+else
+	exit 0
+fi
 
 PPPOE_SERVER_IFACES_OPT=
 if [ -n "$PPPOE_SERVER_IFACES" ]; then
-    for iface in $PPPOE_SERVER_IFACES; do
-	PPPOE_SERVER_IFACES_OPT="-I $iface $PPPOE_SERVER_IFACES_OPT"
-    done
+	for iface in $PPPOE_SERVER_IFACES; do
+		PPPOE_SERVER_IFACES_OPT="-I $iface $PPPOE_SERVER_IFACES_OPT"
+	done
 fi
 [ -z "$PPPOE_SERVER_AC_NAME" ] && PPPOE_SERVER_AC_NAME="$(hostname -s)"
 [ -z "$PPPOE_SERVER_LOCAL_IP" ] && PPPOE_SERVER_LOCAL_IP="$(hostname -i)"
@@ -39,7 +46,7 @@ case "$1" in
 		msg_starting "PPPoE Server"
 		modprobe -k pppoe > /dev/null 2>&1
 		for iface in $PPPOE_SERVER_IFACES; do
-		    ip link set $iface up 2> /dev/null
+			ip link set $iface up 2> /dev/null
 		done
 		daemon /usr/sbin/pppoe-server \
 			${PPPOE_SERVER_IFACES_OPT:--I eth0} -C $PPPOE_SERVER_AC_NAME \
@@ -49,16 +56,17 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/pppoe-server
 	else
 		msg_already_running "PPPoE Server"
+		exit 1
 	fi
 	;;
   stop)
-        if [ -f /var/lock/subsys/pppoe-server ]; then
+	if [ -f /var/lock/subsys/pppoe-server ]; then
 		msg_stopping "PPPoE Server"
 		killproc pppoe-server
 		rm -f /var/lock/subsys/pppoe-server >/dev/null 2>&1
 	else
 		msg_not_running "PPPoE Server"
-		RETVAL=1
+		exit 1
 	fi	
 	;;
   restart|reload)
@@ -70,7 +78,7 @@ case "$1" in
 	RETVAL=$?
 	;;
   *)
-	msg_usage "$0 {start|stop|init|status|restart|reload}"
+	msg_usage "$0 {start|stop|init|restart|reload|status}"
 	exit 1
 esac
 
