@@ -607,7 +607,7 @@ diff -urN rp-pppoe-3.5.org/src/configure.in rp-pppoe-3.5/src/configure.in
 +        AC_MSG_WARN([*** Oops!  I couldn't find pppd, the PPP daemon anywhere.])
 +	AC_MSG_WARN([*** You must install pppd, version 2.3.10 or later.])
 +	AC_MSG_WARN([*** I will keep going, but it may not work.])
-+	PPPD="pppd"
++	PPPD="/usr/sbin/pppd"
  fi
  
  dnl Figure out pppd version.  2.3.7 to 2.3.9 -- issue warning.  Less than
