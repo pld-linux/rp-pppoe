@@ -1,3 +1,5 @@
+# TODO:
+# - SECURITY: http://securitytracker.com/alerts/2004/Oct/1011517.html
 Summary:	PPP Over Ethernet client
 Summary(pl):	Klient PPP Poprzez Ethernet (PPPoE)
 Summary(pt_BR):	Protocolo PPPoE (PPP over Ethernet), usado comumente com modens xDSL
