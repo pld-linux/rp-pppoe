@@ -89,6 +89,8 @@ rp-pppoe.
 Summary:	PPPoE server
 Summary(pl):	Serwer PPPoE
 Group:		Networking/Daemons
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 Requires:	ppp >= 2.4.1
 
 %description server
@@ -101,6 +103,8 @@ Serwer PPP over Ethernet.
 Summary:	PPPoE relay
 Summary(pl):	Agent przekazuj±cy pakiety PPPoE
 Group:		Networking/Daemons
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 
 %description relay
 PPP over Ethernet relay.
