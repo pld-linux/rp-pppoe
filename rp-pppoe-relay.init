@@ -43,6 +43,7 @@ done
 [ -z "$PPPOE_RELAY_MAX_SESSIONS" ] && PPPOE_RELAY_MAX_SESSIONS=500
 [ -z "$PPPOE_RELAY_TIMEOUT" ] && PPPOE_RELAY_TIMEOUT=600
 
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -61,7 +62,6 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/pppoe-relay
 	else
 		msg_already_running "PPPoE Relay Server"
-		exit 1
 	fi
 	;;
   stop)
@@ -71,20 +71,20 @@ case "$1" in
 		rm -f /var/lock/subsys/pppoe-relay >/dev/null 2>&1
 	else
 		msg_not_running "PPPoE Relay Server"
-		exit 1
 	fi	
 	;;
-  restart|reload)
+  restart|force-reload)
 	$0 stop
 	$0 start
+	exit $?
 	;;
   status)
 	status pppoe-relay
-	RETVAL=$?
+	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|init|restart|reload|status}"
-	exit 1
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
 esac
 
 exit $RETVAL
