@@ -96,7 +96,7 @@ Requires:	ppp >= 2.4.1
 %description server
 PPP over Ethernet server.
 
-%description -l pl server
+%description server -l pl
 Serwer PPP over Ethernet.
 
 %package relay
@@ -109,7 +109,7 @@ Requires(post,preun):	/sbin/chkconfig
 %description relay
 PPP over Ethernet relay.
 
-%description -l pl relay
+%description relay -l pl
 Agent przekazuj±cy pakiety PPPoE.
 
 %prep
