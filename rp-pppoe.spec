@@ -46,6 +46,9 @@ cd src
 %{__aclocal}
 %{__autoconf}
 %configure
+# kernel mode PPPoE support is in pppd 2.4.2 (cvs) package
+# and we want here such support in utilities like pppoe-server
+echo '#define HAVE_LINUX_KERNEL_PPPOE 1' >> config.h
 %{__make}
 
 %install
