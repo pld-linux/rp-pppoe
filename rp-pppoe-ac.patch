@@ -1,6 +1,6 @@
 diff -urN rp-pppoe-3.5.org/src/configure.in rp-pppoe-3.5/src/configure.in
 --- rp-pppoe-3.5.org/src/configure.in	Mon Aug 12 21:09:47 2002
-+++ rp-pppoe-3.5/src/configure.in	Mon Aug 12 21:35:58 2002
++++ rp-pppoe-3.5/src/configure.in	Mon Aug 12 21:42:39 2002
 @@ -26,17 +26,17 @@
  AC_HEADER_TIME
  AC_STRUCT_TM
@@ -64,9 +64,9 @@ diff -urN rp-pppoe-3.5.org/src/configure.in rp-pppoe-3.5/src/configure.in
 -	$ECHO "*** You must install pppd, version 2.3.10 or later."
 -	$ECHO "*** I will keep going, but it may not work."
 -	$ECHO ""
-+        AC_MSG_WARN(*** Oops!  I couldn't find pppd, the PPP daemon anywhere.)
-+	AC_MSG_WARN(*** You must install pppd, version 2.3.10 or later.)
-+	AC_MSG_WARN(*** I will keep going, but it may not work.)
++        AC_MSG_WARN([*** Oops!  I couldn't find pppd, the PPP daemon anywhere.])
++	AC_MSG_WARN([*** You must install pppd, version 2.3.10 or later.])
++	AC_MSG_WARN([*** I will keep going, but it may not work.])
  fi
  
  dnl Figure out pppd version.  2.3.7 to 2.3.9 -- issue warning.  Less than
@@ -79,9 +79,9 @@ diff -urN rp-pppoe-3.5.org/src/configure.in rp-pppoe-3.5/src/configure.in
 -	$ECHO "*** You need at least 2.3.7 (2.3.10 or newer recommended.)"
 -	$ECHO "*** I will keep going, but it may not work."
 -	$ECHO ""
-+	AC_MSG_WARN(*** Oops! Your version of pppd is $PPPD_VERSION, which is too old.)
-+	AC_MSG_WARN(*** You need at least 2.3.7 (2.3.10 or newer recommended.)
-+	AC_MSG_WARN(*** I will keep going, but it may not work.)
++	AC_MSG_WARN([*** Oops! Your version of pppd is $PPPD_VERSION, which is too old.])
++	AC_MSG_WARN([*** You need at least 2.3.7 (2.3.10 or newer recommended.])
++	AC_MSG_WARN([*** I will keep going, but it may not work.])
  	;;
  
  2.3.7|2.3.8|2.3.9)
@@ -90,9 +90,9 @@ diff -urN rp-pppoe-3.5.org/src/configure.in rp-pppoe-3.5/src/configure.in
 -	$ECHO "*** not be able to use connect-on-demand.  Upgrade to pppd"
 -	$ECHO "*** 2.3.10 or newer if you need connect-on-demand."
 -	$ECHO ""
-+	AC_MSG_WARN(*** Warning.  Your version of pppd is $PPPD_VERSION.  You will)
-+	AC_MSG_WARN(*** not be able to use connect-on-demand.  Upgrade to pppd)
-+	AC_MSG_WARN(*** 2.3.10 or newer if you need connect-on-demand.)
++	AC_MSG_WARN([*** Warning.  Your version of pppd is $PPPD_VERSION.  You will])
++	AC_MSG_WARN([*** not be able to use connect-on-demand.  Upgrade to pppd])
++	AC_MSG_WARN([*** 2.3.10 or newer if you need connect-on-demand.])
  	;;
  
  2*|3*|4*|5*|6*|7*|8*|9*)
@@ -104,9 +104,9 @@ diff -urN rp-pppoe-3.5.org/src/configure.in rp-pppoe-3.5/src/configure.in
 -	$ECHO "*** All I got back was '$PPPD_VERSION'"
 -	$ECHO "*** I will keep going, but it may not work."
 -	$ECHO ""
-+	AC_MSG_WARN(*** Oops.  I cannot figure out what version of pppd you have.)
-+	AC_MSG_WARN(*** All I got back was '$PPPD_VERSION')
-+	AC_MSG_WARN(*** I will keep going, but it may not work.)
++	AC_MSG_WARN([*** Oops.  I cannot figure out what version of pppd you have.])
++	AC_MSG_WARN([*** All I got back was '$PPPD_VERSION'])
++	AC_MSG_WARN([*** I will keep going, but it may not work.])
  	;;
  esac
  
@@ -132,6 +132,7 @@ diff -urN rp-pppoe-3.5.org/src/configure.in rp-pppoe-3.5/src/configure.in
 -$ECHO "        $TARGETS"
 -$ECHO ""
 -$ECHO "Type 'make' to compile the software."
-+AC_MSG_WARN(On this platform, the following targets will be built:)
-+AC_MSG_WARN(        $TARGETS)
-+AC_MSG_WARN(Type 'make' to compile the software.)
++AC_MSG_WARN([On this platform, the following targets will be built:])
++AC_MSG_WARN([$TARGETS])
++AC_MSG_WARN([Type 'make' to compile the software.])
+
