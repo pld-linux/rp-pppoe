@@ -76,10 +76,10 @@ Group:		X11/Applications/Networking
 Requires:	rp-pppoe >= 3.4
 
 %description gui
-This package contains the graphical frontend (tk-based) for rp-pppoe.
+This package contains the graphical frontend (Tk-based) for rp-pppoe.
 
 %description gui -l pl
-Graficzny interfejs u¿ytkownika (bazuj±cy na tk) dla rp-pppoe.
+Graficzny interfejs u¿ytkownika (oparty na Tk) dla rp-pppoe.
 
 %description gui -l pt_BR
 Este pacote fornece uma interface gráfica para a configuração do
