@@ -21,8 +21,8 @@ Patch1:		%{name}-tkpppoe.in.patch
 Patch2:		%{name}-enobufs.patch
 Patch3:		%{name}-plugins.patch
 URL:		http://www.roaringpenguin.com/pppoe/
-BuildRequires:	automake
 BuildRequires:	autoconf
+BuildRequires:	automake
 Requires:	ppp >= 2.4.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -91,9 +91,9 @@ rp-pppoe.
 Summary:	PPPoE server
 Summary(pl):	Serwer PPPoE
 Group:		Networking/Daemons
-PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
 Requires:	ppp >= 2.4.1
+Requires:	rc-scripts
 
 %description server
 PPP over Ethernet server.
@@ -105,8 +105,8 @@ Serwer PPP over Ethernet.
 Summary:	PPPoE relay
 Summary(pl):	Agent przekazuj±cy pakiety PPPoE
 Group:		Networking/Daemons
-PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 
 %description relay
 PPP over Ethernet relay.
@@ -212,11 +212,11 @@ fi
 %config(noreplace) %{_sysconfdir}/ppp/pppoe-server-options
 %{_mandir}/man8/pppoe-server*
 %attr(754,root,root) /etc/rc.d/init.d/pppoe-server
-%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/sysconfig/pppoe-server
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/pppoe-server
 
 %files relay
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/pppoe-relay
 %{_mandir}/man8/pppoe-relay*
 %attr(754,root,root) /etc/rc.d/init.d/pppoe-relay
-%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/sysconfig/pppoe-relay
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/pppoe-relay
