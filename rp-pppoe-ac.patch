@@ -1,6 +1,6 @@
-diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup.in
---- rp-pppoe-3.5.org/scripts/adsl-setup.in	Wed Sep 25 17:05:37 2002
-+++ rp-pppoe-3.5/scripts/adsl-setup.in	Wed Sep 25 17:08:51 2002
+diff -urN rp-pppoe-3.7.orig/scripts/pppoe-setup.in rp-pppoe-3.7/scripts/pppoe-setup.in
+--- rp-pppoe-3.7.orig/scripts/pppoe-setup.in	2005-11-17 03:14:32.000000000 +0100
++++ rp-pppoe-3.7/scripts/pppoe-setup.in	2005-12-21 17:29:08.000000000 +0100
 @@ -20,7 +20,6 @@
  IFCONFIG=/sbin/ifconfig
  PPPD=@PPPD@
@@ -21,11 +21,11 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
      fi
  }
  
--$ECHO "Welcome to the Roaring Penguin ADSL client setup.  First, I will run"
+-$ECHO "Welcome to the Roaring Penguin PPPoE client setup.  First, I will run"
 -$ECHO "some checks on your system to make sure the PPPoE client is installed"
 -$ECHO "properly..."
 -$ECHO ""
-+echo "Welcome to the Roaring Penguin ADSL client setup.  First, I will run"
++echo "Welcome to the Roaring Penguin PPPoE client setup.  First, I will run"
 +echo "some checks on your system to make sure the PPPoE client is installed"
 +echo "properly..."
 +echo ""
@@ -54,8 +54,8 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
 +    echo "must install the PPP software suite, version 2.3.10 or later."
      exit 1
  fi
- 
-@@ -74,18 +73,18 @@
+ export CONFIG
+@@ -74,17 +73,17 @@
  
  # pppoe must exist
  if [ ! -x "$PPPOE" ] ; then
@@ -73,35 +73,32 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
 -    $ECHO ""
 -    $ECHO "USER NAME"
 -    $ECHO ""
--    $ECHO -n ">>> Enter your PPPoE user name (default $USER): "
 +    echo ""
 +    echo "USER NAME"
 +    echo ""
-+    echo -n ">>> Enter your PPPoE user name (default $USER): "
+     printf "%s" ">>> Enter your PPPoE user name (default $USER): "
      read U
  
-     if [ "$U" = "" ] ; then
-@@ -96,112 +95,112 @@
+@@ -96,12 +95,12 @@
      if test `uname -s` = "Linux" ; then
  	$IFCONFIG $ETH > /dev/null 2>&1 || ETH=eth0
      fi
 -    $ECHO ""
 -    $ECHO "INTERFACE"
 -    $ECHO ""
--    $ECHO ">>> Enter the Ethernet interface connected to the ADSL modem"
+-    $ECHO ">>> Enter the Ethernet interface connected to the DSL modem"
 -    $ECHO "For Solaris, this is likely to be something like /dev/hme0."
 -    $ECHO "For Linux, it will be ethn, where 'n' is a number."
--    $ECHO -n "(default $ETH): "
 +    echo ""
 +    echo "INTERFACE"
 +    echo ""
-+    echo ">>> Enter the Ethernet interface connected to the ADSL modem"
++    echo ">>> Enter the Ethernet interface connected to the DSL modem"
 +    echo "For Solaris, this is likely to be something like /dev/hme0."
 +    echo "For Linux, it will be ethn, where 'n' is a number."
-+    echo -n "(default $ETH): "
+     printf "%s" "(default $ETH): "
      read E
  
-     if [ "$E" = "" ] ; then
+@@ -109,27 +108,27 @@
  	E="$ETH"
      fi
  
@@ -112,7 +109,6 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
 -    $ECHO "stay up permanently, enter 'no' (two letters, lower-case.)"
 -    $ECHO "NOTE: Demand-activated links do not interact well with dynamic IP"
 -    $ECHO "addresses.  You may have some problems with demand-activated links."
--    $ECHO -n ">>> Enter the demand value (default $DEMAND): "
 +    echo ""
 +    echo "Do you want the link to come up on demand, or stay up continuously?"
 +    echo "If you want it to come up on demand, enter the idle time in seconds"
@@ -120,7 +116,7 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
 +    echo "stay up permanently, enter 'no' (two letters, lower-case.)"
 +    echo "NOTE: Demand-activated links do not interact well with dynamic IP"
 +    echo "addresses.  You may have some problems with demand-activated links."
-+    echo -n ">>> Enter the demand value (default $DEMAND): "
+     printf "%s" ">>> Enter the demand value (default $DEMAND): "
      read D
      if [ "$D" = "" ] ; then
  	D=$DEMAND
@@ -134,7 +130,6 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
 -    $ECHO "enter 'server' (all lower-case) here."
 -    $ECHO "If you just press enter, I will assume you know what you are"
 -    $ECHO "doing and not modify your DNS setup."
--    $ECHO -n ">>> Enter the DNS information here: "
 +    echo ""
 +    echo "DNS"
 +    echo ""
@@ -143,19 +138,18 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
 +    echo "enter 'server' (all lower-case) here."
 +    echo "If you just press enter, I will assume you know what you are"
 +    echo "doing and not modify your DNS setup."
-+    echo -n ">>> Enter the DNS information here: "
+     printf "%s" ">>> Enter the DNS information here: "
  
      read DNS1
- 
+@@ -137,24 +136,24 @@
  
      if [ "$DNS1" != "" ] ; then
          if [ "$DNS1" != "server" ] ; then
 -	    $ECHO "Please enter the IP address of your ISP's secondary DNS server."
 -	    $ECHO "If you just press enter, I will assume there is only one DNS server."
--	    $ECHO -n ">>> Enter the secondary DNS server address here: "
 +	    echo "Please enter the IP address of your ISP's secondary DNS server."
 +	    echo "If you just press enter, I will assume there is only one DNS server."
-+	    echo -n ">>> Enter the secondary DNS server address here: "
+ 	    printf "%s" ">>> Enter the secondary DNS server address here: "
  	    read DNS2
  	fi
      fi
@@ -168,23 +162,18 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
 +	echo "PASSWORD"
 +	echo ""
  	stty -echo
--	$ECHO -n ">>> Please enter your PPPoE password:    "
-+	echo -n ">>> Please enter your PPPoE password:    "
+ 	printf "%s" ">>> Please enter your PPPoE password:    "
  	read PWD1
 -	$ECHO ""
--	$ECHO -n ">>> Please re-enter your PPPoE password: "
 +	echo ""
-+	echo -n ">>> Please re-enter your PPPoE password: "
+ 	printf "%s" ">>> Please re-enter your PPPoE password: "
  	read PWD2
 -	$ECHO ""
 +	echo ""
  	stty echo
  	if [ "$PWD1" = "$PWD2" ] ; then
  	    break
- 	fi
- 
--	$ECHO -n ">>> Sorry, the passwords do not match.  Try again? (y/n)"
-+	echo -n ">>> Sorry, the passwords do not match.  Try again? (y/n)"
+@@ -164,44 +163,44 @@
  	read ANS
  	case "$ANS" in
  	    N|No|NO|Non|n|no|non)
@@ -236,7 +225,6 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
 -	    $ECHO "1 - STANDALONE: Appropriate for a basic stand-alone web-surfing workstation"
 -	    $ECHO "2 - MASQUERADE: Appropriate for a machine acting as an Internet gateway"
 -	    $ECHO "                for a LAN"
--	    $ECHO -n ">>> Choose a type of firewall (0-2): "
 +	    echo "The firewall choices are:"
 +	    echo "0 - NONE: This script will not set any firewall rules.  You are responsible"
 +	    echo "          for ensuring the security of your machine.  You are STRONGLY"
@@ -244,7 +232,7 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
 +	    echo "1 - STANDALONE: Appropriate for a basic stand-alone web-surfing workstation"
 +	    echo "2 - MASQUERADE: Appropriate for a machine acting as an Internet gateway"
 +	    echo "                for a LAN"
-+	    echo -n ">>> Choose a type of firewall (0-2): "
+ 	    printf "%s" ">>> Choose a type of firewall (0-2): "
  	    read a
  	    if [ "$a" = 0 -o "$a" = 1 -o "$a" = 2 ] ; then
  		break
@@ -254,7 +242,7 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
  	done
  
  	case "$a" in
-@@ -217,33 +216,33 @@
+@@ -217,31 +216,31 @@
  	esac
      fi
  
@@ -297,11 +285,8 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
 +    echo "Firewalling:        $FIREWALL"
 +    echo ""
      while [ true ] ; do
--        $ECHO -n '>>> Accept these settings and adjust configuration files (y/n)? '
-+        echo -n '>>> Accept these settings and adjust configuration files (y/n)? '
+         printf "%s" '>>> Accept these settings and adjust configuration files (y/n)? '
          read ANS
- 	case "ANS" in
- 	    Y|y|yes|Yes|oui|Oui)
 @@ -264,7 +263,7 @@
  
  # Adjust configuration files.  First to $CONFIG
@@ -374,23 +359,23 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-setup.in rp-pppoe-3.5/scripts/adsl-setup
 -$ECHO ""
 -$ECHO "Congratulations, it should be all set up!"
 -$ECHO ""
--$ECHO "Type 'adsl-start' to bring up your ADSL link and 'adsl-stop' to bring"
--$ECHO "it down.  Type 'adsl-status' to see the link status."
+-$ECHO "Type 'pppoe-start' to bring up your PPPoE link and 'pppoe-stop' to bring"
+-$ECHO "it down.  Type 'pppoe-status' to see the link status."
 +echo ""
 +echo ""
 +echo ""
 +echo "Congratulations, it should be all set up!"
 +echo ""
-+echo "Type 'adsl-start' to bring up your ADSL link and 'adsl-stop' to bring"
-+echo "it down.  Type 'adsl-status' to see the link status."
++echo "Type 'pppoe-start' to bring up your PPPoE link and 'pppoe-stop' to bring"
++echo "it down.  Type 'pppoe-status' to see the link status."
  exit 0
-diff -urN rp-pppoe-3.5.org/scripts/adsl-start.in rp-pppoe-3.5/scripts/adsl-start.in
---- rp-pppoe-3.5.org/scripts/adsl-start.in	Wed Sep 25 17:05:37 2002
-+++ rp-pppoe-3.5/scripts/adsl-start.in	Wed Sep 25 17:09:07 2002
+diff -urN rp-pppoe-3.7.orig/scripts/pppoe-start.in rp-pppoe-3.7/scripts/pppoe-start.in
+--- rp-pppoe-3.7.orig/scripts/pppoe-start.in	2005-11-17 03:14:32.000000000 +0100
++++ rp-pppoe-3.7/scripts/pppoe-start.in	2005-12-21 17:29:28.000000000 +0100
 @@ -28,7 +28,6 @@
  
  # Paths to programs
- CONNECT=@sbindir@/adsl-connect
+ CONNECT=@sbindir@/pppoe-connect
 -ECHO=@ECHO@
  IFCONFIG=/sbin/ifconfig
  
@@ -501,17 +486,17 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-start.in rp-pppoe-3.5/scripts/adsl-start
 +    echo "$ME: Cannot read configuration file '$CONFIG'" >& 2
      exit 1
  fi
- 
+ export CONFIG
 @@ -134,7 +133,7 @@
      # Check if still running
      kill -0 $PID > /dev/null 2>&1
      if [ $? = 0 ] ; then
--	$ECHO "$ME: There already seems to be an ADSL connection up (PID $PID)" >& 2
-+	echo "$ME: There already seems to be an ADSL connection up (PID $PID)" >& 2
+-	$ECHO "$ME: There already seems to be a PPPoE connection up (PID $PID)" >& 2
++	echo "$ME: There already seems to be a PPPoE connection up (PID $PID)" >& 2
  	exit 1
      fi
      # Delete bogus PIDFILE
-@@ -169,14 +168,14 @@
+@@ -169,7 +168,7 @@
      # Looks like the interface came up
      if [ $? = 0 ] ; then
  	# Print newline if standard input is a TTY
@@ -520,162 +505,24 @@ diff -urN rp-pppoe-3.5.org/scripts/adsl-start.in rp-pppoe-3.5/scripts/adsl-start
  	exit 0
      fi
  
-     if test -n "$FORCEPING" ; then
--	$ECHO -n "$FORCEPING"
-+	echo -n "$FORCEPING"
-     else
--	tty -s && $ECHO -n "$PING"
-+	tty -s && echo -n "$PING"
-     fi
-     sleep $CONNECT_POLL
-     TIME=`expr $TIME + $CONNECT_POLL`
 @@ -185,7 +184,7 @@
      fi
  done
  
 -$ECHO "TIMED OUT" >& 2
 +echo "TIMED OUT" >& 2
- # Timed out!  Kill the adsl-connect process and quit
+ # Timed out!  Kill the pppoe-connect process and quit
  kill $CONNECT_PID > /dev/null 2>&1
  
-diff -urN rp-pppoe-3.5.org/src/configure.in rp-pppoe-3.5/src/configure.in
---- rp-pppoe-3.5.org/src/configure.in	Wed Sep 25 17:05:37 2002
-+++ rp-pppoe-3.5/src/configure.in	Wed Sep 25 17:05:45 2002
-@@ -26,17 +26,17 @@
- AC_HEADER_TIME
- AC_STRUCT_TM
- 
--dnl Check for an echo which supports -n -- another hack for Solaris
--AC_PATH_PROG(ECHO, echo, "", /usr/ucb/bin:$PATH)
--
- dnl Check for sockaddr_ll
- AC_MSG_CHECKING(for struct sockaddr_ll)
- AC_TRY_COMPILE([#include <asm/types.h>
- #include <linux/if_packet.h>
- #include <linux/if_ether.h>
- ], [struct sockaddr_ll sa;],
--ac_cv_struct_sockaddr_ll=yes, ac_cv_struct_sockaddr_ll=no)
--$ECHO $ac_cv_struct_sockaddr_ll
-+[ac_cv_struct_sockaddr_ll=yes
-+ AC_MSG_RESULT(yes)],
-+[ac_cv_struct_sockaddr_ll=no
-+ AC_MSG_RESULT(no)
-+])
- if test "$ac_cv_struct_sockaddr_ll" = yes ; then
- AC_DEFINE(HAVE_STRUCT_SOCKADDR_LL)
- fi
-@@ -45,8 +45,10 @@
- AC_MSG_CHECKING(for N_HDLC line discipline)
- AC_TRY_COMPILE([#include <linux/termios.h>],
- 	[int x = N_HDLC;],
--	ac_cv_n_hdlc=yes, ac_cv_n_hdlc=no)
--$ECHO $ac_cv_n_hdlc
-+	[ac_cv_n_hdlc=yes
-+	 AC_MSG_RESULT(yes)],
-+	[ac_cv_n_hdlc=no
-+	 AC_MSG_RESULT(no)])
- if test "$ac_cv_n_hdlc" = yes ; then
- AC_DEFINE(HAVE_N_HDLC)
- fi
-@@ -146,12 +148,15 @@
- {
- 	if (socket(AF_PPPOX, SOCK_DGRAM, PX_PROTO_OE) >= 0) return 0; else return 1;
- }
--], ac_cv_linux_kernel_pppoe=yes, ac_cv_linux_kernel_pppoe=no)
-+], [ac_cv_linux_kernel_pppoe=yes
-+    AC_MSG_RESULT(yes)], 
-+   [ac_cv_linux_kernel_pppoe=no
-+    AC_MSG_RESULT(no)])
- else
- 	ac_cv_linux_kernel_pppoe=no
-+	AC_MSG_RESULT(no)
- fi
- 
--$ECHO $ac_cv_linux_kernel_pppoe
- if test "$ac_cv_linux_kernel_pppoe" != yes ; then
-    if test "$LINUX_KERNELMODE_PLUGIN" = rp-pppoe.so; then
-       echo "*** Your kernel does not appear to have built-in PPPoE support,"
-@@ -166,44 +171,37 @@
- 
- dnl If we couldn't find pppd, die
- if test "$PPPD" = "NOTFOUND"; then
--	$ECHO ""
--	$ECHO "*** Oops!  I couldn't find pppd, the PPP daemon anywhere."
--	$ECHO "*** You must install pppd, version 2.3.10 or later."
--	$ECHO "*** I will keep going, but it may not work."
--	$ECHO ""
-+        AC_MSG_WARN([*** Oops!  I couldn't find pppd, the PPP daemon anywhere.])
-+	AC_MSG_WARN([*** You must install pppd, version 2.3.10 or later.])
-+	AC_MSG_WARN([*** I will keep going, but it may not work.])
+diff -urN rp-pppoe-3.7.orig/src/configure.in rp-pppoe-3.7/src/configure.in
+--- rp-pppoe-3.7.orig/src/configure.in	2005-11-17 03:14:32.000000000 +0100
++++ rp-pppoe-3.7/src/configure.in	2005-12-21 17:35:35.000000000 +0100
+@@ -184,7 +184,7 @@
+         AC_MSG_WARN([*** Oops!  I couldn't find pppd, the PPP daemon anywhere.])
+ 	AC_MSG_WARN([*** You must install pppd, version 2.3.10 or later.])
+ 	AC_MSG_WARN([*** I will keep going, but it may not work.])
+-	PPPD=pppd
 +	PPPD="/usr/sbin/pppd"
  fi
  
  dnl Figure out pppd version.  2.3.7 to 2.3.9 -- issue warning.  Less than
- dnl 2.3.7 -- stop
- 
--PPPD_VERSION=`$PPPD --version 2>&1 | awk '{print $NF}'`
-+PPPD_VERSION=`$PPPD --version 2>&1 | awk ' /version/ {print $NF}'`
- 
- case "$PPPD_VERSION" in
- 1.*|2.0.*|2.1.*|2.2.*|2.3.0|2.3.1|2.3.2|2.3.3|2.3.4|2.3.5|2.3.6)
--	$ECHO ""
--	$ECHO "*** Oops! Your version of pppd is $PPPD_VERSION, which is too old."
--	$ECHO "*** You need at least 2.3.7 (2.3.10 or newer recommended.)"
--	$ECHO "*** I will keep going, but it may not work."
--	$ECHO ""
-+	AC_MSG_WARN([*** Oops! Your version of pppd is $PPPD_VERSION, which is too old.])
-+	AC_MSG_WARN([*** You need at least 2.3.7 (2.3.10 or newer recommended.])
-+	AC_MSG_WARN([*** I will keep going, but it may not work.])
- 	;;
- 
- 2.3.7|2.3.8|2.3.9)
--	$ECHO ""
--	$ECHO "*** Warning.  Your version of pppd is $PPPD_VERSION.  You will"
--	$ECHO "*** not be able to use connect-on-demand.  Upgrade to pppd"
--	$ECHO "*** 2.3.10 or newer if you need connect-on-demand."
--	$ECHO ""
-+	AC_MSG_WARN([*** Warning.  Your version of pppd is $PPPD_VERSION.  You will])
-+	AC_MSG_WARN([*** not be able to use connect-on-demand.  Upgrade to pppd])
-+	AC_MSG_WARN([*** 2.3.10 or newer if you need connect-on-demand.])
- 	;;
- 
- 2*|3*|4*|5*|6*|7*|8*|9*)
- 	;;
- 
- *)
--	$ECHO ""
--	$ECHO "*** Oops.  I cannot figure out what version of pppd you have."
--	$ECHO "*** All I got back was '$PPPD_VERSION'"
--	$ECHO "*** I will keep going, but it may not work."
--	$ECHO ""
-+	AC_MSG_WARN([*** Oops.  I cannot figure out what version of pppd you have.])
-+	AC_MSG_WARN([*** All I got back was '$PPPD_VERSION'])
-+	AC_MSG_WARN([*** I will keep going, but it may not work.])
- 	;;
- esac
- 
-@@ -234,10 +232,10 @@
- }], PACK=normal, PACK=rev)
- 
- if test "$PACK" = "rev" ; then
--	$ECHO "reversed"
-+	AC_MSG_RESULT(reversed)
- 	AC_DEFINE(PACK_BITFIELDS_REVERSED)
- else
--	$ECHO "normal"
-+	AC_MSG_RESULT(normal)
- fi
- 
- # Sigh... got to fix this up for tcl
-@@ -304,8 +302,6 @@
- 
- AC_OUTPUT(Makefile libevent/Makefile ../scripts/adsl-connect ../scripts/adsl-start ../scripts/adsl-stop ../scripts/adsl-init ../scripts/adsl-init-suse ../scripts/adsl-init-turbolinux ../scripts/adsl-setup ../gui/Makefile ../gui/tkpppoe $EXTRACONFIGS)
- 
--$ECHO ""
--$ECHO "On this platform, the following targets will be built:"
--$ECHO "        $TARGETS"
--$ECHO ""
--$ECHO "Type 'make' to compile the software."
-+AC_MSG_WARN([On this platform, the following targets will be built:])
-+AC_MSG_WARN([$TARGETS])
-+AC_MSG_WARN([Type 'make' to compile the software.])
