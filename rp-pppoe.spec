@@ -1,25 +1,22 @@
-# TODO:
-# - SECURITY: http://securitytracker.com/alerts/2004/Oct/1011517.html
 Summary:	PPP Over Ethernet client
 Summary(pl):	Klient PPP Poprzez Ethernet (PPPoE)
 Summary(pt_BR):	Protocolo PPPoE (PPP over Ethernet), usado comumente com modens xDSL
 Summary(ru):	PPP Over Ethernet (–œƒƒ≈“÷À¡ xDSL)
 Summary(uk):	PPP Over Ethernet (–¶ƒ‘“…ÕÀ¡ xDSL)
 Name:		rp-pppoe
-Version:	3.5
-Release:	6
+Version:	3.7
+Release:	1
 License:	GPL v2+
 Group:		Networking
-Source0:	http://www.roaringpenguin.com/pppoe/%{name}-%{version}.tar.gz
-# Source0-md5:	97972f8f8f6a3ab9b7070333a6a29c4b
+Source0:	http://www.roaringpenguin.com/penguin/pppoe/%{name}-%{version}.tar.gz
+# Source0-md5:	edc01c9ade2dc521536a990c204b0623
 Source1:	%{name}-server.init
 Source2:	%{name}-server.sysconfig
 Source3:	%{name}-relay.init
 Source4:	%{name}-relay.sysconfig
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-tkpppoe.in.patch
-Patch2:		%{name}-enobufs.patch
-Patch3:		%{name}-plugins.patch
+Patch2:		%{name}-plugins.patch
 URL:		http://www.roaringpenguin.com/pppoe/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -119,7 +116,6 @@ Agent przekazuj±cy pakiety PPPoE.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 cd src
@@ -185,18 +181,22 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc doc/* README
-%attr(755,root,root) %{_sbindir}/adsl*
+%doc README doc/*
 %attr(755,root,root) %{_sbindir}/pppoe
+%attr(755,root,root) %{_sbindir}/pppoe-connect
+%attr(755,root,root) %{_sbindir}/pppoe-setup
 %attr(755,root,root) %{_sbindir}/pppoe-sniff
+%attr(755,root,root) %{_sbindir}/pppoe-st*
 
 %config(noreplace) %{_sysconfdir}/ppp/pppoe.conf
 %config(noreplace) %{_sysconfdir}/ppp/firewall-masq
 %config(noreplace) %{_sysconfdir}/ppp/firewall-standalone
-%{_mandir}/man5/*
-%{_mandir}/man8/adsl*
-%{_mandir}/man8/pppoe.*
+%{_mandir}/man5/pppoe.conf.*
+%{_mandir}/man8/pppoe-connect*
+%{_mandir}/man8/pppoe-setup*
 %{_mandir}/man8/pppoe-sniff*
+%{_mandir}/man8/pppoe-st*
+%{_mandir}/man8/pppoe.*
 
 %files gui
 %defattr(644,root,root,755)
