@@ -5,7 +5,7 @@ Summary(ru):	PPP Over Ethernet (поддержка xDSL)
 Summary(uk):	PPP Over Ethernet (п╕дтримка xDSL)
 Name:		rp-pppoe
 Version:	3.7
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Networking
 Source0:	http://www.roaringpenguin.com/penguin/pppoe/%{name}-%{version}.tar.gz
