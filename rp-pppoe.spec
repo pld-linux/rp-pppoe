@@ -4,12 +4,12 @@ Summary(pt_BR):	Protocolo PPPoE (PPP over Ethernet), usado comumente com modens 
 Summary(ru):	PPP Over Ethernet (поддержка xDSL)
 Summary(uk):	PPP Over Ethernet (п╕дтримка xDSL)
 Name:		rp-pppoe
-Version:	3.7
-Release:	2
+Version:	3.8
+Release:	1
 License:	GPL v2+
 Group:		Networking
 Source0:	http://www.roaringpenguin.com/penguin/pppoe/%{name}-%{version}.tar.gz
-# Source0-md5:	32c34455ccdfd9610304479e1beac3ff
+# Source0-md5:	0e32760f498f9cde44081ee6aafc823b
 Source1:	%{name}-server.init
 Source2:	%{name}-server.sysconfig
 Source3:	%{name}-relay.init
