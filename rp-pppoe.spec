@@ -1,8 +1,8 @@
 Summary:	PPP Over Ethernet client
-Summary(pl):	Klient PPP Poprzez Ethernet (PPPoE)
-Summary(pt_BR):	Protocolo PPPoE (PPP over Ethernet), usado comumente com modens xDSL
-Summary(ru):	PPP Over Ethernet (ÐÏÄÄÅÒÖËÁ xDSL)
-Summary(uk):	PPP Over Ethernet (Ð¦ÄÔÒÉÍËÁ xDSL)
+Summary(pl.UTF-8):   Klient PPP Poprzez Ethernet (PPPoE)
+Summary(pt_BR.UTF-8):   Protocolo PPPoE (PPP over Ethernet), usado comumente com modens xDSL
+Summary(ru.UTF-8):   PPP Over Ethernet (Ð¿Ð¾Ð´Ð´ÐµÑ€Ð¶ÐºÐ° xDSL)
+Summary(uk.UTF-8):   PPP Over Ethernet (Ð¿Ñ–Ð´Ñ‚Ñ€Ð¸Ð¼ÐºÐ° xDSL)
 Name:		rp-pppoe
 Version:	3.8
 Release:	1
@@ -33,61 +33,61 @@ The client is a user-mode program and does not require any kernel
 modifications. It is fully compliant with RFC 2516, the official PPPoE
 specification.
 
-%description -l pl
-PPPoE (Protokó³ Punkt-Punkt poprzez Ethernet) jest protoko³em u¿ywanym
-przez wielu dostarczycieli us³ugi ADSL.
+%description -l pl.UTF-8
+PPPoE (ProtokÃ³Å‚ Punkt-Punkt poprzez Ethernet) jest protokoÅ‚em uÅ¼ywanym
+przez wielu dostarczycieli usÅ‚ugi ADSL.
 
-Klient jest programem dzia³aj±cym w przestrzeni u¿ytkownika, a to
-oznacza, ¿e nie wymaga modyfikacji kernela. Jest w pe³ni zgodny z
-oficjaln± specyfikacj± PPPoE - RFC 2516.
+Klient jest programem dziaÅ‚ajÄ…cym w przestrzeni uÅ¼ytkownika, a to
+oznacza, Å¼e nie wymaga modyfikacji kernela. Jest w peÅ‚ni zgodny z
+oficjalnÄ… specyfikacjÄ… PPPoE - RFC 2516.
 
-%description -l pt_BR
-PPPoE (Point-to-Point Protocol over Ethernet) é um protocolo usado por
-muitos provedores de acesso à internet e companhias telefÔnicas para
+%description -l pt_BR.UTF-8
+PPPoE (Point-to-Point Protocol over Ethernet) Ã© um protocolo usado por
+muitos provedores de acesso Ã  internet e companhias telefÃ”nicas para
 prover acesso de alta velocidade xDSL.
 
-Este cliente é um programa user-mode que não necessita de modificações
-no kernel. Esta implementação segue a RFC 2516, a especificação
+Este cliente Ã© um programa user-mode que nÃ£o necessita de modificaÃ§Ãµes
+no kernel. Esta implementaÃ§Ã£o segue a RFC 2516, a especificaÃ§Ã£o
 oficial para PPPoE.
 
-%description -l ru
-PPPoE (Point-to-Point Protocol over Ethernet) - ÜÔÏ ÐÒÏÔÏËÏÌ,
-ÉÓÐÏÌØÚÕÅÍÙÊ ÍÎÏÇÉÍÉ ADSL ISP. Roaring Penguin ÐÒÅÄÏÓÔÁ×ÌÑÅÔ
-Ó×ÏÂÏÄÎÏÒÁÓÐÒÏÓÔÒÁÎÑÅÍÏÇÏ ËÌÉÅÎÔÁ ÄÌÑ ÐÏÄËÌÀÞÅÎÉÑ Ë ÔÁËÉÍ ISP.
+%description -l ru.UTF-8
+PPPoE (Point-to-Point Protocol over Ethernet) - ÑÑ‚Ð¾ Ð¿Ñ€Ð¾Ñ‚Ð¾ÐºÐ¾Ð»,
+Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼Ñ‹Ð¹ Ð¼Ð½Ð¾Ð³Ð¸Ð¼Ð¸ ADSL ISP. Roaring Penguin Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚
+ÑÐ²Ð¾Ð±Ð¾Ð´Ð½Ð¾Ñ€Ð°ÑÐ¿Ñ€Ð¾ÑÑ‚Ñ€Ð°Ð½ÑÐµÐ¼Ð¾Ð³Ð¾ ÐºÐ»Ð¸ÐµÐ½Ñ‚Ð° Ð´Ð»Ñ Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ Ðº Ñ‚Ð°ÐºÐ¸Ð¼ ISP.
 
-ëÌÉÅÎÔ ÐÒÅÄÓÔÁ×ÌÑÅÔ ÓÏÂÏÊ ÐÏÌÎÏÓÔØÀ ÐÏÌØÚÏ×ÁÔÅÌØÓËÕÀ ÐÒÏÇÒÁÍÍÕ É ÎÅ
-ÔÒÅÂÕÅÔ ËÁËÉÈ-ÌÉÂÏ ÍÏÄÉÆÉËÁÃÉÊ ÑÄÒÁ. ïÎ ÐÏÌÎÏÓÔØÀ ÓÏ×ÍÅÓÔÉÍ Ó RFC
-2516, ÏÆÉÃÉÁÌØÎÏÊ ÓÐÅÃÉÆÉËÁÃÉÅÊ PPPoE.
+ÐšÐ»Ð¸ÐµÐ½Ñ‚ Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚ ÑÐ¾Ð±Ð¾Ð¹ Ð¿Ð¾Ð»Ð½Ð¾ÑÑ‚ÑŒÑŽ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒÑÐºÑƒÑŽ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ñƒ Ð¸ Ð½Ðµ
+Ñ‚Ñ€ÐµÐ±ÑƒÐµÑ‚ ÐºÐ°ÐºÐ¸Ñ…-Ð»Ð¸Ð±Ð¾ Ð¼Ð¾Ð´Ð¸Ñ„Ð¸ÐºÐ°Ñ†Ð¸Ð¹ ÑÐ´Ñ€Ð°. ÐžÐ½ Ð¿Ð¾Ð»Ð½Ð¾ÑÑ‚ÑŒÑŽ ÑÐ¾Ð²Ð¼ÐµÑÑ‚Ð¸Ð¼ Ñ RFC
+2516, Ð¾Ñ„Ð¸Ñ†Ð¸Ð°Ð»ÑŒÐ½Ð¾Ð¹ ÑÐ¿ÐµÑ†Ð¸Ñ„Ð¸ÐºÐ°Ñ†Ð¸ÐµÐ¹ PPPoE.
 
-%description -l uk
-PPPoE (Point-to-Point Protocol over Ethernet) - ÃÅ ÐÒÏÔÏËÏÌ, ÑËÉÊ
-×ÉËÏÒÉÓÔÏ×Õ¤ÔØÓÑ ÂÁÇÁÔØÍÁ ADSL ISP. Roaring Penguin ÎÁÄÁ¤ ×¦ÌØÎÏÇÏ
-ËÌ¦¤ÎÔÁ ÄÌÑ Ð¦ÄËÌÀÞÅÎÎÑ ÄÏ ÔÁËÉÈ ISP.
+%description -l uk.UTF-8
+PPPoE (Point-to-Point Protocol over Ethernet) - Ñ†Ðµ Ð¿Ñ€Ð¾Ñ‚Ð¾ÐºÐ¾Ð», ÑÐºÐ¸Ð¹
+Ð²Ð¸ÐºÐ¾Ñ€Ð¸ÑÑ‚Ð¾Ð²ÑƒÑ”Ñ‚ÑŒÑÑ Ð±Ð°Ð³Ð°Ñ‚ÑŒÐ¼Ð° ADSL ISP. Roaring Penguin Ð½Ð°Ð´Ð°Ñ” Ð²Ñ–Ð»ÑŒÐ½Ð¾Ð³Ð¾
+ÐºÐ»Ñ–Ñ”Ð½Ñ‚Ð° Ð´Ð»Ñ Ð¿Ñ–Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð½Ñ Ð´Ð¾ Ñ‚Ð°ÐºÐ¸Ñ… ISP.
 
-ëÌ¦¤ÎÔ Ñ×ÌÑ¤ ÓÏÂÏÀ ÐÏ×Î¦ÓÔÀ ËÏÒÉÓÔÕ×ÁÃØËÕ ÐÒÏÇÒÁÍÕ ¦ ÎÅ ×ÉÍÁÇÁ¤
-ÂÕÄØ-ÑËÉÈ ÍÏÄÉÆ¦ËÁÃ¦Ê ÑÄÒÁ. ÷¦Î ÐÏ×Î¦ÓÔÀ ÓÕÍ¦ÓÎÉÊ Ú RFC 2516,
-ÏÆ¦Ã¦ÁÌØÎÏÀ ÓÐÅÃÉÆ¦ËÁÃ¦¤À PPPoE.
+ÐšÐ»Ñ–Ñ”Ð½Ñ‚ ÑÐ²Ð»ÑÑ” ÑÐ¾Ð±Ð¾ÑŽ Ð¿Ð¾Ð²Ð½Ñ–ÑÑ‚ÑŽ ÐºÐ¾Ñ€Ð¸ÑÑ‚ÑƒÐ²Ð°Ñ†ÑŒÐºÑƒ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ñƒ Ñ– Ð½Ðµ Ð²Ð¸Ð¼Ð°Ð³Ð°Ñ”
+Ð±ÑƒÐ´ÑŒ-ÑÐºÐ¸Ñ… Ð¼Ð¾Ð´Ð¸Ñ„Ñ–ÐºÐ°Ñ†Ñ–Ð¹ ÑÐ´Ñ€Ð°. Ð’Ñ–Ð½ Ð¿Ð¾Ð²Ð½Ñ–ÑÑ‚ÑŽ ÑÑƒÐ¼Ñ–ÑÐ½Ð¸Ð¹ Ð· RFC 2516,
+Ð¾Ñ„Ñ–Ñ†Ñ–Ð°Ð»ÑŒÐ½Ð¾ÑŽ ÑÐ¿ÐµÑ†Ð¸Ñ„Ñ–ÐºÐ°Ñ†Ñ–Ñ”ÑŽ PPPoE.
 
 %package gui
 Summary:	GUI front-end for rp-pppoe
-Summary(pl):	Graficzny interfejs dla rp-pppoe
-Summary(pt_BR):	Interface gráfica para configuração do rp-pppoe
+Summary(pl.UTF-8):   Graficzny interfejs dla rp-pppoe
+Summary(pt_BR.UTF-8):   Interface grÃ¡fica para configuraÃ§Ã£o do rp-pppoe
 Group:		X11/Applications/Networking
 Requires:	rp-pppoe >= 3.4
 
 %description gui
 This package contains the graphical frontend (Tk-based) for rp-pppoe.
 
-%description gui -l pl
-Graficzny interfejs u¿ytkownika (oparty na Tk) dla rp-pppoe.
+%description gui -l pl.UTF-8
+Graficzny interfejs uÅ¼ytkownika (oparty na Tk) dla rp-pppoe.
 
-%description gui -l pt_BR
-Este pacote fornece uma interface gráfica para a configuração do
+%description gui -l pt_BR.UTF-8
+Este pacote fornece uma interface grÃ¡fica para a configuraÃ§Ã£o do
 rp-pppoe.
 
 %package server
 Summary:	PPPoE server
-Summary(pl):	Serwer PPPoE
+Summary(pl.UTF-8):   Serwer PPPoE
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	ppp >= 2.4.1
@@ -96,12 +96,12 @@ Requires:	rc-scripts
 %description server
 PPP over Ethernet server.
 
-%description server -l pl
+%description server -l pl.UTF-8
 Serwer PPP over Ethernet.
 
 %package relay
 Summary:	PPPoE relay
-Summary(pl):	Agent przekazuj±cy pakiety PPPoE
+Summary(pl.UTF-8):   Agent przekazujÄ…cy pakiety PPPoE
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
@@ -109,8 +109,8 @@ Requires:	rc-scripts
 %description relay
 PPP over Ethernet relay.
 
-%description relay -l pl
-Agent przekazuj±cy pakiety PPPoE.
+%description relay -l pl.UTF-8
+Agent przekazujÄ…cy pakiety PPPoE.
 
 %prep
 %setup -q
