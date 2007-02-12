@@ -1,8 +1,8 @@
 Summary:	PPP Over Ethernet client
-Summary(pl.UTF-8):   Klient PPP Poprzez Ethernet (PPPoE)
-Summary(pt_BR.UTF-8):   Protocolo PPPoE (PPP over Ethernet), usado comumente com modens xDSL
-Summary(ru.UTF-8):   PPP Over Ethernet (поддержка xDSL)
-Summary(uk.UTF-8):   PPP Over Ethernet (підтримка xDSL)
+Summary(pl.UTF-8):	Klient PPP Poprzez Ethernet (PPPoE)
+Summary(pt_BR.UTF-8):	Protocolo PPPoE (PPP over Ethernet), usado comumente com modens xDSL
+Summary(ru.UTF-8):	PPP Over Ethernet (поддержка xDSL)
+Summary(uk.UTF-8):	PPP Over Ethernet (підтримка xDSL)
 Name:		rp-pppoe
 Version:	3.8
 Release:	1
@@ -70,8 +70,8 @@ PPPoE (Point-to-Point Protocol over Ethernet) - це протокол, який
 
 %package gui
 Summary:	GUI front-end for rp-pppoe
-Summary(pl.UTF-8):   Graficzny interfejs dla rp-pppoe
-Summary(pt_BR.UTF-8):   Interface gráfica para configuração do rp-pppoe
+Summary(pl.UTF-8):	Graficzny interfejs dla rp-pppoe
+Summary(pt_BR.UTF-8):	Interface gráfica para configuração do rp-pppoe
 Group:		X11/Applications/Networking
 Requires:	rp-pppoe >= 3.4
 
@@ -87,7 +87,7 @@ rp-pppoe.
 
 %package server
 Summary:	PPPoE server
-Summary(pl.UTF-8):   Serwer PPPoE
+Summary(pl.UTF-8):	Serwer PPPoE
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	ppp >= 2.4.1
@@ -101,7 +101,7 @@ Serwer PPP over Ethernet.
 
 %package relay
 Summary:	PPPoE relay
-Summary(pl.UTF-8):   Agent przekazujący pakiety PPPoE
+Summary(pl.UTF-8):	Agent przekazujący pakiety PPPoE
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
