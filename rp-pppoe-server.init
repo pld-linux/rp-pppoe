@@ -44,7 +44,7 @@ case "$1" in
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/pppoe-server ]; then
 		msg_starting "PPPoE Server"
-		modprobe -k pppoe > /dev/null 2>&1
+		modprobe pppoe > /dev/null 2>&1
 		for iface in $PPPOE_SERVER_IFACES; do
 			ip link set $iface up 2> /dev/null
 		done
