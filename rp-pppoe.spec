@@ -4,12 +4,12 @@ Summary(pt_BR.UTF-8):	Protocolo PPPoE (PPP over Ethernet), usado comumente com m
 Summary(ru.UTF-8):	PPP Over Ethernet (поддержка xDSL)
 Summary(uk.UTF-8):	PPP Over Ethernet (підтримка xDSL)
 Name:		rp-pppoe
-Version:	3.8
-Release:	3
+Version:	3.10
+Release:	1
 License:	GPL v2+
 Group:		Networking
-Source0:	http://www.roaringpenguin.com/penguin/pppoe/%{name}-%{version}.tar.gz
-# Source0-md5:	0e32760f498f9cde44081ee6aafc823b
+Source0:	http://www.roaringpenguin.com/files/download/%{name}-%{version}.tar.gz
+# Source0-md5:	d58a13cc4185bca6121a606ff456dec0
 Source1:	%{name}-server.init
 Source2:	%{name}-server.sysconfig
 Source3:	%{name}-relay.init
@@ -17,7 +17,7 @@ Source4:	%{name}-relay.sysconfig
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-tkpppoe.in.patch
 Patch2:		%{name}-plugins.patch
-URL:		http://www.roaringpenguin.com/pppoe/
+URL:		http://www.roaringpenguin.com/products/pppoe
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -133,9 +133,9 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/{sysconfig,rc.d/init.d}
 
 %{__make} -C src install \
-	RPM_INSTALL_ROOT=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT
 %{__make} -C gui install \
-	RPM_INSTALL_ROOT=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/pppoe-server
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/pppoe-server
