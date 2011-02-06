@@ -146,7 +146,7 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/pppoe-relay
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/ppp/rp-pppoe-gui
 
 %clean
-rm -fr $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %post server
 /sbin/chkconfig --add pppoe-server
