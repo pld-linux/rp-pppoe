@@ -146,7 +146,7 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/pppoe-relay
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/ppp/rp-pppoe-gui
 
 # clean docdir
-%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
