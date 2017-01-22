@@ -4,12 +4,12 @@ Summary(pt_BR.UTF-8):	Protocolo PPPoE (PPP over Ethernet), usado comumente com m
 Summary(ru.UTF-8):	PPP Over Ethernet (поддержка xDSL)
 Summary(uk.UTF-8):	PPP Over Ethernet (підтримка xDSL)
 Name:		rp-pppoe
-Version:	3.10
+Version:	3.12
 Release:	1
 License:	GPL v2+
 Group:		Networking
 Source0:	http://www.roaringpenguin.com/files/download/%{name}-%{version}.tar.gz
-# Source0-md5:	d58a13cc4185bca6121a606ff456dec0
+# Source0-md5:	216eb52b69062b92a64ee37fd71f4b66
 Source1:	%{name}-server.init
 Source2:	%{name}-server.sysconfig
 Source3:	%{name}-relay.init
