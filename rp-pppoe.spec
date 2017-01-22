@@ -173,7 +173,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc README doc/*
+%doc README doc/{CHANGES,HOW-TO-CONNECT,KERNEL-MODE-PPPOE,PROBLEMS}
 %attr(755,root,root) %{_sbindir}/pppoe
 %attr(755,root,root) %{_sbindir}/pppoe-connect
 %attr(755,root,root) %{_sbindir}/pppoe-setup
@@ -183,12 +183,12 @@ fi
 %config(noreplace) %{_sysconfdir}/ppp/pppoe.conf
 %config(noreplace) %{_sysconfdir}/ppp/firewall-masq
 %config(noreplace) %{_sysconfdir}/ppp/firewall-standalone
-%{_mandir}/man5/pppoe.conf.*
-%{_mandir}/man8/pppoe-connect*
-%{_mandir}/man8/pppoe-setup*
-%{_mandir}/man8/pppoe-sniff*
-%{_mandir}/man8/pppoe-st*
-%{_mandir}/man8/pppoe.*
+%{_mandir}/man5/pppoe.conf.5*
+%{_mandir}/man8/pppoe-connect.8*
+%{_mandir}/man8/pppoe-setup.8*
+%{_mandir}/man8/pppoe-sniff.8*
+%{_mandir}/man8/pppoe-st*.8*
+%{_mandir}/man8/pppoe.8*
 
 %files gui
 %defattr(644,root,root,755)
@@ -196,19 +196,20 @@ fi
 %attr(755,root,root) %{_sbindir}/pppoe-wrapper
 %dir %{_sysconfdir}/ppp/rp-pppoe-gui
 %{_datadir}/tkpppoe
-%{_mandir}/man1/*
+%{_mandir}/man1/pppoe-wrapper.1*
+%{_mandir}/man1/tkpppoe.1*
 
 %files server
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/pppoe-server
 %config(noreplace) %{_sysconfdir}/ppp/pppoe-server-options
-%{_mandir}/man8/pppoe-server*
+%{_mandir}/man8/pppoe-server.8*
 %attr(754,root,root) /etc/rc.d/init.d/pppoe-server
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/pppoe-server
 
 %files relay
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_sbindir}/pppoe-relay
-%{_mandir}/man8/pppoe-relay*
+%{_mandir}/man8/pppoe-relay.8*
 %attr(754,root,root) /etc/rc.d/init.d/pppoe-relay
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/pppoe-relay
